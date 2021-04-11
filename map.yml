@@ -1,0 +1,7 @@
+map_name: AAZ
+games:
+- game_name: AAZ-NZ
+  file_name: AAZ-NZ.xml
+- game_name: AAZ
+  file_name: AAZ.xml
+version: 0
