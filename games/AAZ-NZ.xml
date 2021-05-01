@@ -1,85 +1,11 @@
 ﻿<?xml version="1.0"?>
 <!DOCTYPE game SYSTEM "game.dtd">
 <game>
-  <info name="AAZ" version="1.0"/>
+  <info name="World War II v7" version="1.0"/>
+  <info gameName="World War II v7"/>
   <loader javaClass="games.strategy.triplea.TripleA"/>
   <triplea minimumVersion="2.0.0"/>
-    <variableList>
-   <variable name="LandArea">
-<element name="Afghanistan"/>
-<element name="Alaska"/>
-<element name="Anglo-Egypt Sudan"/>
-<element name="Angola"/>
-<element name="Archangel"/>
-<element name="Australia"/>
-<element name="Balkans"/>
-<element name="Belgian Congo/Kenya"/>
-<element name="Borneo"/>
-<element name="Brazil"/>
-<element name="Caroline Islands"/>
-<element name="Caucasus"/>
-<element name="Central America"/>
-<element name="Chile/Argentina"/>
-<element name="Coastal China"/>
-<element name="Colombia/Venezuela"/>
-<element name="East Indies"/>
-<element name="Eastern Canada"/>
-<element name="Eastern Europe"/>
-<element name="Eastern United States"/>
-<element name="Erie"/>
-<element name="French Equatorial Africa"/>
-<element name="French Madagascar"/>
-<element name="French West Africa"/>
-<element name="Germany"/>
-<element name="Gibraltar"/>
-<element name="Greenland"/>
-<element name="Hawaiian Islands"/>
-<element name="Iceland"/>
-<element name="India"/>
-<element name="Italian East Africa"/>
-<element name="Iwo Jima"/>
-<element name="Japan"/>
-<element name="Karelia"/>
-<element name="Manchuria"/>
-<element name="Mexico"/>
-<element name="Middle East"/>
-<element name="Midway"/>
-<element name="Mongolia"/>
-<element name="Mozambique"/>
-<element name="New Guinea"/>
-<element name="New Zealand"/>
-<element name="North Africa"/>
-<element name="Norway/Finland"/>
-<element name="Okinawa"/>
-<element name="Philippine Islands"/>
-<element name="Russia"/>
-<element name="Saudi Arabia"/>
-<element name="Siberia"/>
-<element name="Sinkiang"/>
-<element name="Solomon Islands"/>
-<element name="Southeast Asia"/>
-<element name="Southern Europe"/>
-<element name="Soviet Far East"/>
-<element name="Spain/Portugal"/>
-<element name="Sweden"/>
-<element name="Switzerland"/>
-<element name="Szechwan"/>
-<element name="Turkey"/>
-<element name="Ukraine"/>
-<element name="Union of South Africa"/>
-<element name="United Kingdom"/>
-<element name="Urals"/>
-<element name="Wake Island"/>
-<element name="West Indies"/>
-<element name="West Russia"/>
-<element name="Western Canada"/>
-<element name="Western Europe"/>
-<element name="Western United States"/>
-<element name="Yunnan"/>
-
-   </variable>
-  </variableList>
-<map>
+  <map>
 <!-- Territory Definitions -->
 <territory name="1 Sea Zone" water="true"/>
 <territory name="2 Sea Zone" water="true"/>
@@ -496,7 +422,8 @@
 <connection t1="Turkey" t2="Southern Europe"/>
 <connection t1="Ukraine" t2="West Russia"/>
 <connection t1="Western Canada" t2="Western United States"/>
-<connection t1="Eastern United States" t2="Western United States"/>  </map>
+<connection t1="Eastern United States" t2="Western United States"/>
+  </map>
   <resourceList>
     <resource name="PUs"/>
     <resource name="techTokens"/>
@@ -508,7 +435,6 @@
     <player name="British" optional="false"/>
     <player name="Japanese" optional="false"/>
     <player name="Americans" optional="false"/>
-        <player name="Zombies" optional="true"/>
     <!-- Axis Alliances -->
     <alliance player="Germans" alliance="Axis"/>
     <alliance player="Japanese" alliance="Axis"/>
@@ -516,7 +442,6 @@
     <alliance player="Russians" alliance="Allies"/>
     <alliance player="British" alliance="Allies"/>
     <alliance player="Americans" alliance="Allies"/>
-        <alliance player="Zombies" alliance="Zombies"/>
   </playerList>
   <unitList>
     <unit name="infantry"/>
@@ -531,7 +456,6 @@
     <unit name="battleship"/>
     <unit name="factory"/>
     <unit name="recruitmentCenter"/>
-    <unit name="zombie"/>
   </unitList>
   <gamePlay>
     <delegate name="initDelegate" javaClass="games.strategy.triplea.delegate.InitializationDelegate" display="Initializing Delegates"/>
@@ -603,16 +527,6 @@
       <step name="americanPlace" delegate="place" player="Americans"/>
       <step name="americanTechActivation" delegate="tech_activation" player="Americans"/>
       <step name="americanEndTurn" delegate="endTurn" player="Americans"/>
-      
-      <step name="ZombiesTech" delegate="tech" player="Zombies"/>
-      <step name="ZombiesPurchase" delegate="purchase" player="Zombies"/>
-      <step name="ZombiesCombatMove" delegate="move" player="Zombies"/>
-      <step name="ZombiesBattle" delegate="battle" player="Zombies"/>
-      <step name="ZombiesNonCombatMove" delegate="move" player="Zombies" display="Non Combat Move"/>
-      <step name="ZombiesPlace" delegate="place" player="Zombies"/>
-      <step name="ZombiesTechActivation" delegate="tech_activation" player="Zombies"/>
-      <step name="ZombiesEndTurn" delegate="endTurn" player="Zombies"/>
-
       <step name="endRoundStep" delegate="endRound"/>
     </sequence>
   </gamePlay>
@@ -1014,11 +928,6 @@
       <option name="isFactory" value="true"/>
       <option name="isAAforBombingThisUnitOnly" value="true"/>
     </attachment>
-    <attachment name="unitAttachment" attachTo="zombie" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
-      <option name="defense" value="2"/>
-      <option name="attack" value="1"/>
-      <option name="canNotTarget" value="fighter:bomber"/>
-    </attachment>
     <attachment name="territoryAttachment" attachTo="Caroline Islands" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="1"/>
     </attachment>
@@ -1066,6 +975,7 @@
     </attachment>
     <attachment name="territoryAttachment" attachTo="Mozambique" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="0"/>
+      <option name="isImpassable" value="true"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Wake Island" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="0"/>
@@ -1135,9 +1045,11 @@
     </attachment>
     <attachment name="territoryAttachment" attachTo="Angola" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="0"/>
+      <option name="isImpassable" value="true"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Chile/Argentina" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="0"/>
+      <option name="isImpassable" value="true"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Ukraine" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="2"/>
@@ -1165,6 +1077,7 @@
     </attachment>
     <attachment name="territoryAttachment" attachTo="Colombia/Venezuela" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="1"/>
+      <option name="isImpassable" value="true"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Borneo" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="2"/>
@@ -1189,7 +1102,6 @@
     </attachment>
     <attachment name="territoryAttachment" attachTo="Sahara" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="0"/>
-      <option name="isImpassable" value="true"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Eastern United States" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="8"/>
@@ -1198,10 +1110,10 @@
     </attachment>
     <attachment name="territoryAttachment" attachTo="Sweden" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="1"/>
+      <option name="isImpassable" value="true"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Himalaya" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="0"/>
-      <option name="isImpassable" value="true"/>
     </attachment>
     <attachment name="territoryAttachment" attachTo="Anglo-Egypt Sudan" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
       <option name="production" value="1"/>
@@ -1284,58 +1196,6 @@
     <attachment name="techAbilityAttachment" attachTo="jetPower" javaClass="games.strategy.triplea.attachments.TechAbilityAttachment" type="technology">
       <option name="attackBonus" value="1:fighter"/>
     </attachment>
-    <attachment name="conditionAttachmentEveryTurn" attachTo="Germans" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-      <option name="rounds" value="1-100"/>
-    </attachment>
-    
-<attachment foreach="$LandArea$" name="triggerAttachmentZombiesrussianZombie@LandArea@" attachTo="Zombies" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-  <option name="conditions" value="conditionAttachmentEveryTurn"/>
-  <option name="placement" value="@LandArea@:zombie" count="1"/>
-	<option name="players" value="Zombies"/>
-	<option name="chance" value="2:70"/>
-	<option name="when" value="before:russianPurchase"/>
-	</attachment>
-
-<attachment foreach="$LandArea$" name="triggerAttachmentZombiesgermanZombie@LandArea@" attachTo="Zombies" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-  <option name="conditions" value="conditionAttachmentEveryTurn"/>
-  <option name="placement" value="@LandArea@:zombie" count="1"/>
-	<option name="players" value="Zombies"/>
-	<option name="chance" value="2:70"/>
-	<option name="when" value="before:germanPurchase"/>
-	</attachment>
-
-<attachment foreach="$LandArea$" name="triggerAttachmentZombiesgermanZombie@LandArea@" attachTo="Zombies" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-  <option name="conditions" value="conditionAttachmentEveryTurn"/>
-  <option name="placement" value="@LandArea@:zombie" count="1"/>
-	<option name="players" value="Zombies"/>
-	<option name="chance" value="2:70"/>
-	<option name="when" value="before:germanPurchase"/>
-	</attachment>
-
-<attachment foreach="$LandArea$" name="triggerAttachmentZombiesjapaneseZombie@LandArea@" attachTo="Zombies" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-  <option name="conditions" value="conditionAttachmentEveryTurn"/>
-  <option name="placement" value="@LandArea@:zombie" count="1"/>
-  <option name="players" value="Zombies"/>
-  <option name="chance" value="2:70"/>
-  <option name="when" value="before:japanesePurchase"/>
-</attachment>
-
-<attachment foreach="$LandArea$" name="triggerAttachmentZombiesamericanZombie@LandArea@" attachTo="Zombies" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-  <option name="conditions" value="conditionAttachmentEveryTurn"/>
-  <option name="placement" value="@LandArea@:zombie" count="1"/>
-  <option name="players" value="Zombies"/>
-  <option name="chance" value="2:70"/>
-  <option name="when" value="before:americanPurchase"/>
-</attachment>
-
-<attachment foreach="$LandArea$" name="triggerAttachmentZombiesBig@LandArea@" attachTo="Zombies" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-  <option name="conditions" value="conditionAttachmentEveryTurn"/>
-  <option name="placement" value="@LandArea@:zombie:zombie:zombie:zombie:zombie:zombie:zombie:zombie:zombie:zombie"/>
-  <option name="players" value="Zombies"/>
-  <option name="chance" value="1:100"/>
-  <option name="when" value="after:americanPlace"/>
-</attachment>
-
   </attachmentList>
   <initialize>
     <ownerInitialize>
@@ -1522,7 +1382,6 @@
             <unitPlacement unitType="artillery" territory="Western United States" quantity="1" owner="Americans"/>
             <unitPlacement unitType="artillery" territory="Yunnan" quantity="1" owner="Americans"/>
             <unitPlacement unitType="infantry" territory="Yunnan" quantity="1" owner="Americans"/>
-            <unitPlacement unitType="zombie" territory="Germany" quantity="3" owner="Zombies"/>
         </unitInitialize>
         <resourceInitialize>
             <resourceGiven player="Russians" resource="PUs" quantity="14"/>
@@ -1533,7 +1392,7 @@
         </resourceInitialize>
   </initialize>
   <propertyList>
-    <property name="Russians bid" value="0" editable="true">
+    <property name="Russians bid" value="9" editable="true">
       <number min="0" max="1000"/>
     </property>
     <property name="Germans bid" value="0" editable="true">
@@ -1711,7 +1570,7 @@
     <property name="Placement Restricted By Factory" value="true" editable="false">
       <boolean/>
     </property>
-    <property name="neutralCharge" value="0" editable="false"/>
+    <property name="neutralCharge" value="9999999" editable="false"/>
     <property name="Neutrals Are Impassable" value="true" editable="false">
       <boolean/>
     </property>
@@ -1721,39 +1580,21 @@
  <property name="Unit Placement Restrictions" value="true" editable="false">
    <boolean/>
 </property>
-		<property name="Use Triggers" value="true" editable="false">
-				<boolean/>
-		</property>
-		  <property name='Land Battle Rounds' value='1' editable='true'>
-		<number min='-1' max='100'/>
-	</property>
-	        <property name="Economic Victory" value="true" editable="true">
-      <boolean/>
-    </property>
-    <property name="Zombie Economic Victory" value="25" editable="true">
-      <number min="0" max="1000"/>
-    </property>
-    <property name="mapName" value="AAZ" editable="false"/>
+    <property name="mapName" value="zombies_world_war_2" editable="false"/>
     <property name="notes">
       <value><![CDATA[
-						<b>Axis & Allies & Zombies</b>
+          <b>Axis & Allies & Zombies</b>
 					<br>
 					<br>1. No strategic bombing.
 					<br>2. No AA Guns / Mechanized Infantry / Cruisers.
 					<br>3. No shore bombardment.
 					<br>4. Cannot build new factories.
 					<br>5. Recruitment centers are like factories but only build infantry
-					<br>6  For balance, 3 Zombies start in Germany
+					<br>6  For balance, a bid of 9 is default for Russia
 					<br><b>Victory Condition:</b>
-					<br> Take 1 enemy capital and hold all your own
-					<br> Zombies win if their income reaches 25
-            <br>Set Game/User Notifications/Show Trigger/Condition Change Roll Failure to off
-						<br>Based upon Axis & Allies & Zombies
-						<br>Player nations are not allowed to invade neutrals, but can move in once zombies have taken over.
-						<br>Note that in this wierd alternate history scenario, the Zombies are restless dead (Draugr) and not contagious as in most modern zombie fiction. They are capable of using weaponry, but too impaired to handle sophisticated weaponry or coordinate their actions.
-						<br>The dead were awakened uncontrallably by Nazi occultists
-						<br>The big change from the original game is that Zombies are not spawned by killing infantry, as there was no way to handle that in TripleA. Instead every area has 1% chance per turn of spawning a horde of 10. In addition each area has a 10% chance each turn of spawning 1.
+					<br> Tke 1 enemy capital and hold all your own
 					<br> Created for TripleA by Roger Cooper
+					<br>
 		        	]]></value>
     </property>
   </propertyList>

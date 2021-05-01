@@ -1,7 +1,7 @@
-map_name: AAZ
+map_name: Zombies-World_War_2
 games:
-- game_name: AAZ-NZ
+- game_name: World War II v7
   file_name: AAZ-NZ.xml
-- game_name: AAZ
+- game_name: Zombies-World_War_2
   file_name: AAZ.xml
-version: 0
+version: 1
